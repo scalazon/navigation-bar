@@ -12,17 +12,7 @@ app.use(
   })
 );
 
-const MongoClient = require(‘mongodb’).MongoClient;
-const dotenv = require('dotenv');
-dotenv.config()
-let url = process.env.MONGO_URI;
-const client = new MongoClient(url, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("test");
-  // perform actions on the collection object
-  client.close();
-});
-
+//Test 
 
 app.get('/hellotest', (req,res) => {
   res.send("Hello from my Docker container")
