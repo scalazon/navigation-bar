@@ -6,8 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --watch",
-    "start_local": "nodemon -r dotenv/config server/server.js",
+    "webpack_dev": "webpack --watch",
+    "server_dev": "nodemon -r dotenv/config server/server.js",
     "dev": "webpack --watch && nodemon -r dotenv/config server/server.js"
   },
   "dependencies": {

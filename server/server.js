@@ -12,7 +12,7 @@ app.use(
   })
 );
 
-app.get('/', (req,res) => {
+app.get('/hellotest', (req,res) => {
   res.send("Hello from my Docker container")
 })
 
