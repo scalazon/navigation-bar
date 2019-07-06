@@ -12,6 +12,10 @@ app.use(
   })
 );
 
+app.get('/hellotest', (req,res) => {
+  res.send("Hello from my Docker container")
+})
+
 app.listen(port, () => {
   console.log(`The shenanigans have started on aisle ${port}`);
 });
