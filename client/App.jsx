@@ -19,6 +19,7 @@ class App extends React.Component {
     return (
       <div style={barStyle}>
         <p>Hello World, from Garrett 💯🙏💯!</p>
+        <p>Testing my ability to update with Git</p>
         <Input />
       </div>
     )
