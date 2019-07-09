@@ -2,7 +2,7 @@ import React from 'react';
 
 const Input = (props) => (
   <>
-    <input placeholder='Look for stuff to waste money on'></input>
+    <input placeholder='Look for products'></input>
     <button>Search</button>
   </>
 )
