@@ -21,3 +21,5 @@ app.get('/hellotest', (req,res) => {
 app.listen(port, () => {
   console.log(`The shenanigans have started on aisle ${port}`);
 });
+
+module.exports = app;
