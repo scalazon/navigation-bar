@@ -8,7 +8,8 @@
     "test": "jest",
     "webpack_dev": "webpack --watch",
     "server_dev": "nodemon -r dotenv/config server/server.js",
-    "dev": "webpack --watch && nodemon -r dotenv/config server/server.js"
+    "dev": "webpack --watch && nodemon -r dotenv/config server/server.js",
+    "seedDB" : "nodemon -r dotenv/config database/dbSeedingServer.js"
   },
   "dependencies": {
     "axios": "^0.18.0",

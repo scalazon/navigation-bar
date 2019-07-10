@@ -6,10 +6,11 @@ const options = {
   useNewUrlParser: true
 };
 
-const dbName = 'test';
-const collectionName = 'test'
+
 
 function getTest() {
+  const dbName = 'test';
+  const collectionName = 'test'
   return MongoClient.connect(uri, options)
   .then(connection => {
     return connection
@@ -25,6 +26,44 @@ function getTest() {
   });
 }
 
+function dataLoader(JSONarray) {
+  const dbName = 'products';
+  const collectionName = 'products'
+  return MongoClient.connect(uri, options)
+  .then(connection => {
+    return connection
+      .db(dbName)
+      .collection(collectionName)
+      .insertMany(JSONarray);
+  })
+  .then(result => {
+    return result;
+  })
+  .catch(err => {
+    console.log('Error in getTest', err);
+  });
+}
+
+function deleteAllProducts() {
+  const dbName = 'products';
+  const collectionName = 'products'
+  return MongoClient.connect(uri, options)
+  .then(connection => {
+    return connection
+      .db(dbName)
+      .collection(collectionName)
+      .remove({});
+  })
+  .then(result => {
+    return result;
+  })
+  .catch(err => {
+    console.log('Error in getTest', err);
+  });
+}
+
 module.exports = {
-  getTest
+  getTest,
+  dataLoader,
+  deleteAllProducts
 };
