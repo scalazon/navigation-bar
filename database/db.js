@@ -26,6 +26,25 @@ function getTest() {
   });
 }
 
+function getAll() {
+  const dbName = 'products';
+  const collectionName = 'products'
+  return MongoClient.connect(uri, options)
+  .then(connection => {
+    return connection
+      .db(dbName)
+      .collection(collectionName)
+      .find({});
+  })
+  .then(result => {
+    return result.toArray();
+  })
+  .catch(err => {
+    console.log('Error in getTest', err);
+  });
+}
+
+
 function dataLoader(JSONarray) {
   const dbName = 'products';
   const collectionName = 'products'
@@ -65,5 +84,6 @@ function deleteAllProducts() {
 module.exports = {
   getTest,
   dataLoader,
-  deleteAllProducts
+  deleteAllProducts,
+  getAll
 };
