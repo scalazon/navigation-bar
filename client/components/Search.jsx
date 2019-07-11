@@ -19,6 +19,12 @@ class SearchBar extends React.Component {
       rawproductData: [],
       navBarData: []
     };
+    this.getSuggestions = this.getSuggestions.bind(this);
+    this.renderSuggestion = this.renderSuggestion.bind(this);
+    this.getSuggestionValue = this.getSuggestionValue.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
+    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this)
   }
 
   componentDidMount() {
@@ -65,25 +71,24 @@ class SearchBar extends React.Component {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
 
-    return inputLength === 0 ? [] : this.state.navBarData.filter(lang =>
-      lang.name.toLowerCase().slice(0, inputLength) === inputValue
+    return inputLength === 0 ? [] : this.state.rawproductData.filter(product =>
+      product.productTitle.toLowerCase().slice(0, inputLength) === inputValue
     );
   };
 
   // Use your imagination to render suggestions.
   renderSuggestion (suggestion) {
     return(
-      <div>
-        {suggestion.name}
-      </div>
+      <span>{suggestion.productTitle}</span>
     )
+
   };
 
   // When suggestion is clicked, Autosuggest needs to populate the input
   // based on the clicked suggestion. Teach Autosuggest how to calculate the
   // input value for every given suggestion.
   getSuggestionValue (suggestion) {
-    return suggestion.name
+    return suggestion.productTitle
   };
 
   onChange (event, { newValue }) {
@@ -96,8 +101,9 @@ class SearchBar extends React.Component {
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested ({ value }) {
     this.setState({
-      suggestions: getSuggestions(value)
+      suggestions: this.getSuggestions(value)
     });
+    console.log('sugesstions are now', this.getSuggestions(value) )
   };
 
   // Autosuggest will call this function every time you need to clear suggestions.
@@ -108,7 +114,9 @@ class SearchBar extends React.Component {
   };
 
   render() {
-    const { value, suggestions } = this.state;
+    // const { value, suggestions } = this.state;
+    const value = this.state.value;
+    const suggestions = this.state.suggestions;
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
@@ -119,15 +127,14 @@ class SearchBar extends React.Component {
 
     // Finally, render it!
     return (
-      // <Autosuggest
-      //   suggestions={suggestions}
-      //   onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-      //   onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-      //   getSuggestionValue={this.getSuggestionValue}
-      //   renderSuggestion={this.renderSuggestion}
-      //   inputProps={this.inputProps}
-      // />
-      <p>Soon-to-be autosuggest</p>
+      <Autosuggest
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        getSuggestionValue={this.getSuggestionValue}
+        renderSuggestion={this.renderSuggestion}
+        inputProps={inputProps}
+      />
     );
   };
 };
