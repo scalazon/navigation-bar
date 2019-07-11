@@ -41,7 +41,6 @@ app.delete('/clearProductsCollection', (req,res) => {
     res.status(200).send("All clear!")
   })
 })
-const { PORT, HOST} = require('../config');
 const port = PORT || 3000;
 const host = HOST || '0.0.0.0';
 

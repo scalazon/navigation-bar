@@ -1,30 +1,12 @@
 const { MongoClient } = require('mongodb');
-const { MONGO_USER, MONGO_PASSWORD} = require('../config');
-
+const MONGO_USER = process.env.MONGO_USER;
+const MONGO_PASSWORD = process.env.MONGO_PASS;
+console.log(MONGO_PASSWORD)
 const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@hackmazon-navbar-c54z1.mongodb.net/test?retryWrites=true&w=majority`;
 const options = {
   useNewUrlParser: true
 };
 
-
-
-function getTest() {
-  const dbName = 'test';
-  const collectionName = 'test'
-  return MongoClient.connect(uri, options)
-  .then(connection => {
-    return connection
-      .db(dbName)
-      .collection(collectionName)
-      .find({});
-  })
-  .then(result => {
-    return result.toArray();
-  })
-  .catch(err => {
-    console.log('Error in getTest', err);
-  });
-}
 
 function getAll() {
   const dbName = 'products';
@@ -40,10 +22,47 @@ function getAll() {
     return result.toArray();
   })
   .catch(err => {
-    console.log('Error in getTest', err);
+    console.log('Error in getAll', err);
   });
 }
 
+function getCategories() {
+  const dbName = 'products';
+  const collectionName = 'products'
+  return MongoClient.connect(uri, options)
+  .then(connection => {
+    return connection
+      .db(dbName)
+      .collection(collectionName)
+      .distinct('category', {});
+  })
+  .then(result => {
+    return result;
+  })
+  .catch(err => {
+    console.log('Error in getCategories', err);
+  });
+};
+
+function getNavBarData() {
+  const dbName = 'products';
+  const collectionName = 'products'
+  return MongoClient.connect(uri, options)
+  .then(connection => {
+    return connection
+      .db(dbName)
+      .collection(collectionName)
+      .find({})
+      .project({productTitle: 1, asin: 1, category: 1});
+  })
+  .then(result => {
+    return result.toArray();
+  })
+  .catch(err => {
+    console.log('Error in getNavBarData', err);
+  });
+
+};
 
 function dataLoader(JSONarray) {
   const dbName = 'products';
@@ -82,8 +101,9 @@ function deleteAllProducts() {
 }
 
 module.exports = {
-  getTest,
   dataLoader,
   deleteAllProducts,
-  getAll
+  getAll,
+  getNavBarData,
+  getCategories
 };
