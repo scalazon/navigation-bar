@@ -30,13 +30,13 @@ class SearchBar extends React.Component {
 
   componentDidMount() {
     //Get category data and raw product data from Mongo and transfom into navBarData array we can use
-    Axios.get('/products/categories')
+    Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/categories')
     .then((result)=>{
       const categoriesArray = result.data;
       this.setState({
         categories: categoriesArray
       });
-      return Axios.get('/products/navBarData')
+      return Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/navBarData')
     }).then((result) => {
       const productData = result.data;
       this.setState({
@@ -116,7 +116,6 @@ class SearchBar extends React.Component {
 
   // Function to broadcast ASIN of selected item once item is clicked or enter is pressed
   broadcastASIN (event, suggestionObject) {
-    console.log('selected item ASIN:', suggestionObject.suggestion.asin);
     const bc = new BroadcastChannel('product-change');
     bc.postMessage(suggestionObject.suggestion.asin);
   };
