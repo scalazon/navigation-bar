@@ -33,18 +33,15 @@ class App extends React.Component {
         </nav>
         <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
           <div className="collapse navbar-collapse">
-            <ul class='navbar-nav mr-auto'>
-              <li class='nav-item active'>
-                <a class='nav-link' href='#'>Deliver to Garrett</a>
+            <ul className='navbar-nav mr-auto'>
+              <li className='nav-item active'>
+                <a className='nav-link' href='#'>Deliver to Garrett</a>
               </li>
             </ul>
           </div>
         </nav>
       </div>
-      // <div className='navigation_bar'>
-      //   <h2>Welcome to Hackmazon - Please buy some stuff </h2>
-      //   <SearchBar />
-      // </div>
+      
     )
   }
 }
