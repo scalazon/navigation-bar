@@ -29,11 +29,6 @@ app.post('/loadBulkData', (req,res) => {
   dataLoader(productData).then(result => {
     res.status(201).send("Data loaded!")
   })
-  
-  // console logs for testing:
-  // console.log("The type of the data is:", typeof data);
-  // console.log("The data is an array?", Array.isArray(data))
-  // console.log("Length of data is:", data.length)
 })
 
 app.delete('/clearProductsCollection', (req,res) => {
@@ -41,8 +36,8 @@ app.delete('/clearProductsCollection', (req,res) => {
     res.status(200).send("All clear!")
   })
 })
-const port = PORT || 3000;
-const host = HOST || '0.0.0.0';
+const port = 3000;
+const host = '0.0.0.0';
 
 app.listen(port, host, () => {
   console.log(`DB Seed Server server running http://${host}:${port}`);

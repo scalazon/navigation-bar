@@ -8,7 +8,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'navbar_bundle.js'
   },
 
   module: {
@@ -17,7 +17,11 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: ['babel-loader']
-      }
+      }, 
+      {
+        test: /\.css$/,
+         use: ['style-loader', 'css-loader']
+      } 
     ]
   }
 };

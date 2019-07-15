@@ -1,7 +1,6 @@
 const { MongoClient } = require('mongodb');
 const MONGO_USER = process.env.MONGO_USER;
 const MONGO_PASSWORD = process.env.MONGO_PASS;
-console.log(MONGO_PASSWORD)
 const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@hackmazon-navbar-c54z1.mongodb.net/test?retryWrites=true&w=majority`;
 const options = {
   useNewUrlParser: true

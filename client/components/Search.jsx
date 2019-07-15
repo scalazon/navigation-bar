@@ -24,7 +24,8 @@ class SearchBar extends React.Component {
     this.getSuggestionValue = this.getSuggestionValue.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
-    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this)
+    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
+    this.broadcastASIN = this.broadcastASIN.bind(this);
   }
 
   componentDidMount() {
@@ -113,6 +114,13 @@ class SearchBar extends React.Component {
     });
   };
 
+  // Function to broadcast ASIN of selected item once item is clicked or enter is pressed
+  broadcastASIN (event, suggestionObject) {
+    console.log('selected item ASIN:', suggestionObject.suggestion.asin);
+    const bc = new BroadcastChannel('product-change');
+    bc.postMessage(suggestionObject.suggestion.asin);
+  };
+
   render() {
     // const { value, suggestions } = this.state;
     const value = this.state.value;
@@ -133,6 +141,7 @@ class SearchBar extends React.Component {
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={this.getSuggestionValue}
         renderSuggestion={this.renderSuggestion}
+        onSuggestionSelected={this.broadcastASIN}
         inputProps={inputProps}
       />
     );
