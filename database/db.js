@@ -1,111 +1,24 @@
-// const { MongoClient } = require('mongodb');
-// const MONGO_USER = process.env.MONGO_USER;
-// const MONGO_PASSWORD = process.env.MONGO_PASS;
-// const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0-c54z1.mongodb.net/test?retryWrites=true&w=majority`
-// const options = {
-//   useNewUrlParser: true
-// };
+const mongoose = require('mongoose');
+const connection = require('./index')
 
-// function connect(uri) {
-//   return MongoClient.connect(uri).then(client => client.db());
-// }
+const Schema = mongoose.Schema;
 
-function getAll() {
-  const dbName = 'products';
-  const collectionName = 'products'
-  return MongoClient.connect(uri, options)
-  .then(connection => {
-    return connection
-      .db(dbName)
-      .collection(collectionName)
-      .find({});
-  })
-  .then(result => {
-    return result.toArray();
-  })
-  .catch(err => {
-    console.log('Error in getAll', err);
-  });
-}
+const ProductSchema = new Schema({
+  url: String,
+  asin: String,
+  productTitle: String,
+  bulletPoints: String,
+  price: Number,
+  category: String,
+  attributes: String,
+  totalImages: Number,
+  imageName: String
+});
 
-function getCategories() {
-  const dbName = 'products';
-  const collectionName = 'products'
-  return MongoClient.connect(uri, options)
-  .then(connection => {
-    return connection
-      .db(dbName)
-      .collection(collectionName)
-      .distinct('category', {});
-  })
-  .then(result => {
-    return result;
-  })
-  .catch(err => {
-    console.log('Error in getCategories', err);
-  });
-};
+const Product = mongoose.model('Product', ProductSchema);
 
-function getNavBarData() {
-  const dbName = 'products';
-  const collectionName = 'products'
-  return MongoClient.connect(uri, options)
-  .then(connection => {
-    return connection
-      .db(dbName)
-      .collection(collectionName)
-      .find({})
-      .project({productTitle: 1, asin: 1, category: 1});
-  })
-  .then(result => {
-    return result.toArray();
-  })
-  .catch(err => {
-    console.log('Error in getNavBarData', err);
-  });
+module.exports.getAll = () => (
+  Product.find({})
+  .catch(console.error)
+)
 
-};
-
-function dataLoader(JSONarray) {
-  const dbName = 'products';
-  const collectionName = 'products'
-  return MongoClient.connect(uri, options)
-  .then(connection => {
-    return connection
-      .db(dbName)
-      .collection(collectionName)
-      .insertMany(JSONarray);
-  })
-  .then(result => {
-    return result;
-  })
-  .catch(err => {
-    console.log('Error in getTest', err);
-  });
-}
-
-function deleteAllProducts() {
-  const dbName = 'products';
-  const collectionName = 'products'
-  return MongoClient.connect(uri, options)
-  .then(connection => {
-    return connection
-      .db(dbName)
-      .collection(collectionName)
-      .remove({});
-  })
-  .then(result => {
-    return result;
-  })
-  .catch(err => {
-    console.log('Error in getTest', err);
-  });
-}
-
-module.exports = {
-  dataLoader,
-  deleteAllProducts,
-  getAll,
-  getNavBarData,
-  getCategories
-};

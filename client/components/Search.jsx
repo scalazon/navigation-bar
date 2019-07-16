@@ -20,7 +20,6 @@ class SearchBar extends React.Component {
       suggestions: [],
       categories: [],
       rawproductData: [],
-      navBarData: []
     };
     this.getSuggestions = this.getSuggestions.bind(this);
     this.renderSuggestion = this.renderSuggestion.bind(this);
@@ -32,44 +31,15 @@ class SearchBar extends React.Component {
   }
 
   componentDidMount() {
-    //Get category data and raw product data from Mongo and transfom into navBarData array we can use
-    // Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/categories')
-    Axios.get('/products/categories')
-    .then((result)=>{
-      const categoriesArray = result.data;
-      this.setState({
-        categories: categoriesArray
-      });
-      // return Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/navBarData')
-      return Axios.get('/products/navBarData')
-    }).then((result) => {
+
+    Axios.get('/products/navBarData')
+    .then((result) => {
       const productData = result.data;
       this.setState({
         rawproductData: productData
-      });
-    }).then(() => {
-      let navBarData = []
-      for (let i=0; i < this.state.categories.length; i++) {
-        let categoryObject = {};
-        let category = this.state.categories[i]
-        categoryObject.title = category
-        categoryObject.suggestions = [];
-        for (let j=0; j < this.state.rawproductData.length; j++) {
-          if (this.state.rawproductData[j].category === category) {
-            let productObj = {
-              text: this.state.rawproductData[j].productTitle,
-              asin: this.state.rawproductData[j].asin
-            };
-            categoryObject.suggestions.push(productObj);
-          }
-        }
-        navBarData.push(categoryObject);
-      }
-      this.setState({
-        navBarData: navBarData
       })
-      console.log(this.state.navBarData)
     })
+    
   };
 
   // Teach Autosuggest how to calculate suggestions for any given input value.
@@ -109,7 +79,6 @@ class SearchBar extends React.Component {
     this.setState({
       suggestions: this.getSuggestions(value)
     });
-    console.log('sugesstions are now', this.getSuggestions(value) )
   };
 
   // Autosuggest will call this function every time you need to clear suggestions.
