@@ -36,6 +36,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.5.0",
+    "@babel/plugin-transform-runtime": "^7.5.0",
     "@babel/preset-env": "^7.5.3",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.2",
@@ -69,20 +70,14 @@
       [
         "@babel/react"
       ]
-    ]
+    ],
+    "env": {
+      "test": {
+        "plugins": ["@babel/plugin-transform-runtime"]
+      }
+    }
   },
   "jest": {
-    "testEnvironment": "node",
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
-      "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
-    }
+    "testEnvironment": "node"
   }
 }
