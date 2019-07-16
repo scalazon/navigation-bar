@@ -1,6 +1,9 @@
 import Autosuggest from 'react-autosuggest';
 import Axios from 'axios';
 import React from 'react';
+import theme from './Search.styles.js'
+
+
 
 
 class SearchBar extends React.Component {
@@ -24,17 +27,20 @@ class SearchBar extends React.Component {
     this.getSuggestionValue = this.getSuggestionValue.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
-    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this)
+    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
+    this.broadcastASIN = this.broadcastASIN.bind(this);
   }
 
   componentDidMount() {
     //Get category data and raw product data from Mongo and transfom into navBarData array we can use
+    // Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/categories')
     Axios.get('/products/categories')
     .then((result)=>{
       const categoriesArray = result.data;
       this.setState({
         categories: categoriesArray
       });
+      // return Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/navBarData')
       return Axios.get('/products/navBarData')
     }).then((result) => {
       const productData = result.data;
@@ -113,6 +119,12 @@ class SearchBar extends React.Component {
     });
   };
 
+  // Function to broadcast ASIN of selected item once item is clicked or enter is pressed
+  broadcastASIN (event, suggestionObject) {
+    const bc = new BroadcastChannel('product-change');
+    bc.postMessage(suggestionObject.suggestion.asin);
+  };
+
   render() {
     // const { value, suggestions } = this.state;
     const value = this.state.value;
@@ -127,14 +139,19 @@ class SearchBar extends React.Component {
 
     // Finally, render it!
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={this.renderSuggestion}
-        inputProps={inputProps}
-      />
+        <Autosuggest
+          theme={theme}
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          onSuggestionSelected={this.broadcastASIN}
+          inputProps={inputProps}
+        />
+
+
+     
     );
   };
 };

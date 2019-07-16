@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+// const combineLoaders = require('webpack-combine-loaders');
+
 
 module.exports = {
   mode: 'development',
@@ -8,7 +10,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'navbar_bundle.js'
   },
 
   module: {
@@ -17,7 +19,12 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: ['babel-loader']
-      }
+      }, 
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      
     ]
   }
 };

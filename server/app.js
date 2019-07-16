@@ -2,9 +2,11 @@ const dotenv = require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const { getAll, getCategories, getNavBarData } = require('../database/db')
 
+app.use(cors());
 app.use(express.static('dist'));
 app.use(bodyParser.json({strict: false}));
 
