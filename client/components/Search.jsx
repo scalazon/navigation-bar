@@ -18,7 +18,6 @@ class SearchBar extends React.Component {
     this.state = {
       value: '',
       suggestions: [],
-      categories: [],
       rawproductData: [],
     };
     this.getSuggestions = this.getSuggestions.bind(this);
@@ -32,7 +31,7 @@ class SearchBar extends React.Component {
 
   componentDidMount() {
 
-    Axios.get('/products/navBarData')
+    Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/navBarData')
     .then((result) => {
       const productData = result.data;
       this.setState({

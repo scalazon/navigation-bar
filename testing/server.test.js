@@ -1,22 +1,22 @@
 const request = require('supertest');
 const app = require('../server/app')
 
-describe('Test the hellotest path', () => {
+describe('Test the test path', () => {
 
   test('it should respond to the GET method', () => {
-    return request(app).get('/hellotest').then((response) => {
+    return request(app).get('/test').then((response) => {
       expect(response.statusCode).toBe(200);
-      expect(response.res.text).toBe('Valid GET request from Express server');
+      expect(response.res.text).toBe('Successfully connected!');
     })
   })
 }) 
 
-describe('Test the categories path', () => {
+describe('Test database connectivity', () => {
 
- 
-  test('it should return a valid 200 code', (done) => {
-    expect.assertions(1);
-    return request(app).get('/products/categories')
-      .then(response=> expect(response.text).toEqual("[\"Smart Home\",\"Homes\",\"Clothing, Shoes & Jewelry\",\"Womens clothing\",\"Paternal Saddles\"]"))
+  test('it should return data from the database', () => {
+    return request(app).get('/products/navBarData').then((response) => {
+      expect(response.statusCode).toBe(200);
+      console.log(JSON.parse())
+    })
   })
-})
+}) 
