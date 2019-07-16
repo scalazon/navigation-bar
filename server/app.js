@@ -12,7 +12,7 @@ app.use(bodyParser.json({strict: false}));
 app.get('/test', (req,res) => {
   res.status(200).send('Successfully connected!')
 })
-app.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/navBarData', (req,res) => {
+app.get('/products/navBarData', (req,res) => {
   database.getAll().then(productDataArray => {
     res.send(productDataArray)
   })
