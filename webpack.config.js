@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+// const combineLoaders = require('webpack-combine-loaders');
+
 
 module.exports = {
   mode: 'development',
@@ -18,10 +20,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: ['babel-loader']
       }, 
-      {
-        test: /\.css$/,
-         use: ['style-loader', 'css-loader']
-      } 
+      
     ]
   }
 };

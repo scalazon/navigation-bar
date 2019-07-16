@@ -1,6 +1,9 @@
 import Autosuggest from 'react-autosuggest';
 import Axios from 'axios';
 import React from 'react';
+import theme from './Search.styles.js'
+
+
 
 
 class SearchBar extends React.Component {
@@ -30,13 +33,15 @@ class SearchBar extends React.Component {
 
   componentDidMount() {
     //Get category data and raw product data from Mongo and transfom into navBarData array we can use
-    Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/categories')
+    // Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/categories')
+    Axios.get('/products/categories')
     .then((result)=>{
       const categoriesArray = result.data;
       this.setState({
         categories: categoriesArray
       });
-      return Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/navBarData')
+      // return Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/navBarData')
+      return Axios.get('/products/navBarData')
     }).then((result) => {
       const productData = result.data;
       this.setState({
@@ -134,15 +139,19 @@ class SearchBar extends React.Component {
 
     // Finally, render it!
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={this.renderSuggestion}
-        onSuggestionSelected={this.broadcastASIN}
-        inputProps={inputProps}
-      />
+        <Autosuggest
+          theme={theme}
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          onSuggestionSelected={this.broadcastASIN}
+          inputProps={inputProps}
+        />
+
+
+     
     );
   };
 };
