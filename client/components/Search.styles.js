@@ -40,7 +40,7 @@ const theme = {
     fontSize: '16px',
     borderBottomLeftRadius: '4px',
     borderBottomRightRadius: '4px',
-    zIndex: '10000000000000'
+    zIndex: '100000000000'
   },
   
   suggestionsList: {
