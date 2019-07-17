@@ -20,6 +20,7 @@ class App extends React.Component {
   
   render() {
     let deliverToFont = {
+      fontFamily: 'AmazonEmber_Rg',
       fontSize: '12px',
       lineHeight: '14px',
       fontWeight: '400',
@@ -34,10 +35,74 @@ class App extends React.Component {
       paddingBottom: '5px',
       color: 'white'
     }
+
+    let mapIconStyle = {
+      padding: '0',
+      margin: '0',
+      border: '0',
+      float: 'left',
+    }
+
+    let addressStyle = {
+      width: '85%',
+      float: 'right',
+      paddingBottom: '0'
+    }
+
     return (
       <>
-        <Navbar bg='dark'> 
-          <Navbar.Brand href="#">
+        <Navbar bg='dark' expand={true}> 
+          <Container fluid={true}>
+              <Col xl={2}>
+                <img 
+                src='https://elasticbeanstalk-us-east-2-746219401089.s3.us-east-2.amazonaws.com/Hackmazon-logo-white.png'
+                width='150'
+                height='45'
+                />
+              </Col>
+              <Col xl={8}>
+                <SearchBar />
+              </Col>
+              <Col xl={2}>
+              </Col>
+          </Container>
+        </Navbar>
+        <Navbar bg='dark' variant='dark' expand={true}>
+          <Container fluid={true}>
+            <Col xl={2} style={mapIconStyle}>
+              <IconContext.Provider value={{ color: "white", size: '1.25em'}}>
+                <FiMapPin />
+              </IconContext.Provider>
+              <Container style={addressStyle}>
+                <Row><span style={deliverToFont}>Deliver to Garrett</span></Row>
+                <Row><span style={cityZipFont}>Austin 78703</span></Row>
+              </Container>
+            </Col>
+            <Col xl={8}>
+              <Nav variant='dark'>
+                <Nav.Link href="#">Deliver to Austin</Nav.Link>
+                <Nav.Link href="#">Today's Deals</Nav.Link>
+                <Nav.Link href="#">My Hackmazon.com</Nav.Link>
+                <Nav.Link href="#">Buy Again</Nav.Link>
+                <Nav.Link href="#">Gift Cards</Nav.Link>
+                <Nav.Link href="#">Help</Nav.Link>
+              </Nav>
+            </Col>
+            <Col xl={2}>
+
+            </Col>
+
+          </Container>
+        </Navbar>
+      </>
+    )
+  }
+}
+
+export default App;
+
+/*
+   <Navbar.Brand href="#">
             <img 
               src='https://elasticbeanstalk-us-east-2-746219401089.s3.us-east-2.amazonaws.com/Hackmazon-logo-white.png'
               width='150'
@@ -66,11 +131,9 @@ class App extends React.Component {
             <Nav.Link href="#">Gift Cards</Nav.Link>
             <Nav.Link href="#">Help</Nav.Link>
           </Nav>
-        </Navbar>
-      </>
-    )
-  }
-}
 
-export default App;
 
+
+
+
+*/
