@@ -18,7 +18,6 @@ class App extends React.Component {
 
   render() {
     const deliverToFont = {
-      fontFamily: 'AmazonEmber_Rg',
       fontSize: '12px',
       lineHeight: '14px',
       fontWeight: '400',
@@ -49,7 +48,7 @@ class App extends React.Component {
 
     return (
       <>
-        <Navbar bg="dark" expand>
+        <Navbar id="mainNav" bg="dark" expand>
           <Container fluid>
             <Col xl={2}>
               <img
@@ -65,7 +64,7 @@ class App extends React.Component {
             <Col xl={2} />
           </Container>
         </Navbar>
-        <Navbar bg="dark" variant="dark" expand>
+        <Navbar id="mainNav" bg="dark" variant="dark" expand>
           <Container fluid>
             <Col xl={2} style={mapIconStyle}>
               <IconContext.Provider value={{ color: 'white', size: '1.25em' }}>

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable class-methods-use-this */
 /* eslint-disable import/extensions */
 import Autosuggest from 'react-autosuggest';
 import Axios from 'axios';
@@ -85,13 +87,20 @@ class SearchBar extends React.Component {
     bc.postMessage(suggestionObject.suggestion.asin);
   };
 
-  renderSuggestion (suggestion) {
-    return(
-      <span>{suggestion.productTitle}</span>
-    )
+  renderSuggestion (suggestion,{ query, isHighlighted }) {
+    if (!isHighlighted) {
+      return(
+        <span>{suggestion.productTitle}</span>
+      )
+    } else {
+      return(
+        <span id="suggestionHighlighted">{suggestion.productTitle}</span>
+      )
+    }
 
   }
 
+ 
   render() {
     // const { value, suggestions } = this.state;
     const value = this.state.value;
@@ -114,6 +123,7 @@ class SearchBar extends React.Component {
           getSuggestionValue={this.getSuggestionValue}
           renderSuggestion={this.renderSuggestion}
           onSuggestionSelected={this.broadcastASIN}
+          onSuggestionHighlighted={this.onSuggestionHighlighted}
           inputProps={inputProps}
         />
 
