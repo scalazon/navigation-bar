@@ -1,8 +1,11 @@
 import React from 'react';
+import { MdSearch} from 'react-icons/md';
+import { MdLanguage } from 'react-icons/md';
 import { FiMapPin } from 'react-icons/fi';
 import { IconContext } from 'react-icons';
 import Container from 'react-bootstrap/Container';
-// import Button from 'react-bootstrap/Button'
+import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
@@ -17,79 +20,100 @@ class App extends React.Component {
   }
 
   render() {
-    const deliverToFont = {
-      fontSize: '12px',
-      lineHeight: '14px',
-      fontWeight: '400',
-      marginTop: '9px',
-      color: 'white',
-    };
-
-    const cityZipFont = {
-      fontSize: '14px',
-      lineHeight: '15px',
-      fontWeight: '700',
-      paddingBottom: '5px',
-      color: 'white',
-    };
-
-    const mapIconStyle = {
-      padding: '0',
-      margin: '0',
-      border: '0',
-      float: 'left',
-    };
-
-    const addressStyle = {
-      width: '85%',
-      float: 'right',
-      paddingBottom: '0',
-    };
-
     return (
       <>
         <Navbar id="mainNav" bg="dark" expand>
           <Container fluid>
             <Col xl={2}>
               <img
-                src="https://elasticbeanstalk-us-east-2-746219401089.s3.us-east-2.amazonaws.com/Hackmazon-logo-white.png"
-                width="150"
-                height="45"
+                src="https://elasticbeanstalk-us-east-2-746219401089.s3.us-east-2.amazonaws.com/FEC+Logo+2.png"
+                width="100%"
                 alt="hackmazon_logo"
               />
             </Col>
-            <Col xl={8}>
-              <SearchBar />
+            <Col xl={7}>
+              <Nav>
+                <SearchBar />
+                <Button variant="warning" id="searchButton">
+                  <IconContext.Provider value={{ color: 'black', size: '2em' }}>
+                    <MdSearch />
+                  </IconContext.Provider>
+                </Button>
+              </Nav>
             </Col>
-            <Col xl={2} />
+            <Col xl={4} />
           </Container>
         </Navbar>
         <Navbar id="mainNav" bg="dark" variant="dark" expand>
           <Container fluid>
-            <Col xl={2} style={mapIconStyle}>
-              <IconContext.Provider value={{ color: 'white', size: '1.25em' }}>
-                <FiMapPin />
-              </IconContext.Provider>
-              <Container style={addressStyle}>
-                <Row>
-                  <span style={deliverToFont}>Deliver to Garrett</span>
-                </Row>
-                <Row>
-                  <span style={cityZipFont}>Austin 78703</span>
-                </Row>
-              </Container>
-            </Col>
-            <Col xl={8}>
-              <Nav variant="dark">
-                <Nav.Link href="#">Deliver to Austin</Nav.Link>
-                <Nav.Link href="#">Today's Deals</Nav.Link>
-                <Nav.Link href="#">My Hackmazon.com</Nav.Link>
-                <Nav.Link href="#">Buy Again</Nav.Link>
-                <Nav.Link href="#">Gift Cards</Nav.Link>
-                <Nav.Link href="#">Help</Nav.Link>
+            <Col xl={2}>
+              <Nav className="navLinks">
+                <Button variant="dark" id="mapButton">
+                  <IconContext.Provider value={{ color: 'white', size: '1.5em' , className:'mapIcon'}}>
+                    <FiMapPin />
+                  </IconContext.Provider>
+                  <span id="deliver-top">Deliver to Zubair</span>
+                  <br />
+                  <span id="deliver-bottom">Austin, 78701</span>
+                </Button>
               </Nav>
             </Col>
-            <Col xl={2} />
+            <Col xl={7}>
+              <Nav className="navLinks">
+                <Button variant="dark">Browsing History</Button>
+                <Button variant="dark">Today's Deals</Button>
+                <Button variant="dark">My Hackmazon.com</Button>
+                <Button variant="dark">Buy Again</Button>
+                <Button variant="dark">Whole Foods</Button>
+                <Button variant="dark">Gift Cards</Button>
+                <Button variant="dark">Sell</Button>
+                <Button variant="dark">Help</Button>
+                <Dropdown id="langSelect">
+                  <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                    <IconContext.Provider value={{ color: 'white', size: '1.75em' }}>
+                      <MdLanguage />
+                    </IconContext.Provider>
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item>English - EN</Dropdown.Item>
+                    <Dropdown.Item>Español - ES action</Dropdown.Item>
+                    <Dropdown.Item><a href="#">Learn More</a></Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Nav>
+            </Col>
+            <Col xl={4}>
+              <Nav className="navLinks">
+                <Dropdown id="accountDropdown">
+                  <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                    <span id="hello">Hello, Hack Reactor</span>
+                    <br />
+                    <span id="account">Account & Lists</span>
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Header>Your Account</Dropdown.Header>
+                    <Dropdown.Item>Your Account</Dropdown.Item>
+                    <Dropdown.Item>Your Orders</Dropdown.Item>
+                    <Dropdown.Item>Your Dash Buttons</Dropdown.Item>
+                    <Dropdown.Item>Your Lists</Dropdown.Item>
+                    <Dropdown.Item>Your Recommendations</Dropdown.Item>
+                    <Dropdown.Item>Your Subscribe and Save Items</Dropdown.Item>
+                    <Dropdown.Item>Memberships & Subscriptions</Dropdown.Item>
+                    <Dropdown.Item>Your Service Requests</Dropdown.Item>
+                    <Dropdown.Item>Your Prime Membership</Dropdown.Item>
+                    <Dropdown.Item>Your Garage</Dropdown.Item>
+                    <Dropdown.Item>Your Fanshop</Dropdown.Item>
+                    <Dropdown.Item>Your Pets</Dropdown.Item>
+                    <Dropdown.Item>Start a Selling Account</Dropdown.Item>
+                    <Dropdown.Item>Register for a Business Account</Dropdown.Item>
+                    <Dropdown.Item>Your Amazon Credit Cards</Dropdown.Item>
+                    <Dropdown.Item>Your Content and Devices</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Nav>
+            </Col>
           </Container>
         </Navbar>
       </>
@@ -99,39 +123,3 @@ class App extends React.Component {
 
 export default App;
 
-/*
-   <Navbar.Brand href="#">
-            <img 
-              src='https://elasticbeanstalk-us-east-2-746219401089.s3.us-east-2.amazonaws.com/Hackmazon-logo-white.png'
-              width='150'
-              height='45'
-            />
-          </Navbar.Brand>  
-          <SearchBar />
-        </Navbar>
-        <Navbar bg='dark' variant='dark'>
-          <Navbar.Brand href='#'>
-            <IconContext.Provider value={{ color: "white", size: '1.2em'}}>
-              <FiMapPin />
-            </IconContext.Provider> 
-          </Navbar.Brand>
-          <Nav variant='dark'>
-            <Nav.Link href='#'>
-              <Container>
-                <Row><span style={deliverToFont}>Deliver to Garrett</span></Row>
-                <Row><span style={cityZipFont}>Austin 78703</span></Row>
-              </Container>
-            </Nav.Link>
-            <Nav.Link href="#">Deliver to Austin</Nav.Link>
-            <Nav.Link href="#">Today's Deals</Nav.Link>
-            <Nav.Link href="#">My Hackmazon.com</Nav.Link>
-            <Nav.Link href="#">Buy Again</Nav.Link>
-            <Nav.Link href="#">Gift Cards</Nav.Link>
-            <Nav.Link href="#">Help</Nav.Link>
-          </Nav>
-
-
-
-
-
-*/
