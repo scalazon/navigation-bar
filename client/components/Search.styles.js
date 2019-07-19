@@ -1,13 +1,13 @@
 const theme = {
   container: {
     position: 'relative',
+    width: '100%'
   },
   
   input: {
-    width: '750px',
-    height: '30px',
+    width: '100%',
+    height: 'auto',
     padding: '10px 20px',
-    fontFamily: 'Helvetica, sans-serif',
     fontWeight: '300',
     fontSize: '16px',
     border: '1px solid #aaa',
@@ -31,15 +31,14 @@ const theme = {
     display: 'block',
     position: 'absolute',
     top: '51px',
-    width: '750px',
+    width: '100%',
     border: '1px solid #aaa',
     backgroundColor: '#fff',
-    fontFamily: 'Helvetica, sans-serif',
     fontWeight: '300',
     fontSize: '16px',
     borderBottomLeftRadius: '4px',
     borderBottomRightRadius: '4px',
-    zIndex: '2'
+    zIndex: '100000000000'
   },
   
   suggestionsList: {

@@ -1,11 +1,10 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable import/extensions */
 import Autosuggest from 'react-autosuggest';
 import Axios from 'axios';
 import React from 'react';
-import theme from './Search.styles.js'
-
-
-
-
+import theme from './Search.styles.js';
 class SearchBar extends React.Component {
   constructor() {
     super();
@@ -18,29 +17,31 @@ class SearchBar extends React.Component {
     this.state = {
       value: '',
       suggestions: [],
-      categories: [],
       rawproductData: [],
     };
     this.getSuggestions = this.getSuggestions.bind(this);
     this.renderSuggestion = this.renderSuggestion.bind(this);
     this.getSuggestionValue = this.getSuggestionValue.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
-    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
+    this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(
+      this
+    );
+    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(
+      this
+    );
     this.broadcastASIN = this.broadcastASIN.bind(this);
   }
 
   componentDidMount() {
-
-    Axios.get('/products/navBarData')
-    .then((result) => {
+    Axios.get(
+      'http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/navBarData'
+    ).then(result => {
       const productData = result.data;
       this.setState({
-        rawproductData: productData
-      })
-    })
-    
-  };
+        rawproductData: productData,
+      });
+    });
+  }
 
   // Teach Autosuggest how to calculate suggestions for any given input value.
   getSuggestions (value) {
@@ -49,16 +50,8 @@ class SearchBar extends React.Component {
 
     return inputLength === 0 ? [] : this.state.rawproductData.filter(product =>
       product.productTitle.toLowerCase().slice(0, inputLength) === inputValue
-    );
-  };
-
-  // Use your imagination to render suggestions.
-  renderSuggestion (suggestion) {
-    return(
-      <span>{suggestion.productTitle}</span>
     )
-
-  };
+  }
 
   // When suggestion is clicked, Autosuggest needs to populate the input
   // based on the clicked suggestion. Teach Autosuggest how to calculate the
@@ -94,6 +87,20 @@ class SearchBar extends React.Component {
     bc.postMessage(suggestionObject.suggestion.asin);
   };
 
+  renderSuggestion (suggestion,{ query, isHighlighted }) {
+    if (!isHighlighted) {
+      return(
+        <span>{suggestion.productTitle}</span>
+      )
+    } else {
+      return(
+        <span id="suggestionHighlighted">{suggestion.productTitle}</span>
+      )
+    }
+
+  }
+
+ 
   render() {
     // const { value, suggestions } = this.state;
     const value = this.state.value;
@@ -116,6 +123,7 @@ class SearchBar extends React.Component {
           getSuggestionValue={this.getSuggestionValue}
           renderSuggestion={this.renderSuggestion}
           onSuggestionSelected={this.broadcastASIN}
+          onSuggestionHighlighted={this.onSuggestionHighlighted}
           inputProps={inputProps}
         />
 

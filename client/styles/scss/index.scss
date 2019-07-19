@@ -1,0 +1,96 @@
+@import './themes.scss';
+
+.navLinks {
+  font-family: $ember-font;
+  color: white;
+}
+#mainNav {
+  font-family: $ember-font;
+}
+
+#react-autowhatever-1 {
+  font-family: $ember-font;
+}
+
+#suggestionHighlighted {
+  font-family: $ember-bold;
+}
+
+
+.mapIcon {
+  position: relative;
+  float: left;
+  margin-left:auto; 
+  margin-right:0;
+  margin-top: 10px
+}
+
+#deliver-top {
+  font-family: $ember-font;
+  position: relative;
+  float: right;
+  margin-left:10px; 
+  margin-right:auto;
+}
+
+#deliver-bottom {
+  font-family: $ember-bold;
+  position: relative;
+  float: right;
+  margin-left:10px; 
+  margin-right:auto;
+}
+
+#langSelect {
+  position: relative;
+  float: right;
+  margin-left:auto; 
+  margin-right:0;
+}
+
+#hello {
+  float: left;
+  font-family: $ember-lite;
+  color: $amazon-grey;
+  font-size: 10pt;
+}
+
+#account {
+  float: left;
+  font-family: $ember-bold;
+  color: white;
+  font-size: 12pt;
+}
+
+#searchButton {
+  background-color: $amazon-yellow;
+}
+
+#PrimeButton {
+  margin-top: 5px;
+  align-content: center;
+}
+
+#cartImage {
+  margin-top: 15%;
+  margin-right: 15%;
+  max-width: 80;
+  max-height: 35px
+}
+
+#cartButton {
+  position: relative;
+  display: inline-block;
+}
+
+#cartTotal {
+  position: absolute;
+  z-index: 50;
+  margin: 0 auto;
+  left: 10%;
+  right: 0;
+  top: 0; 
+  text-align: center;
+  width: 60%; 
+  color: $amazon-yellow
+}

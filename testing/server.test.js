@@ -1,22 +1,36 @@
 const request = require('supertest');
 const app = require('../server/app')
+const dotenv = require('dotenv').config()
 
-describe('Test the hellotest path', () => {
+describe('Test the test path', () => {
+
+  afterAll(async (done) => {
+    setImmediate(done);
+  });
 
   test('it should respond to the GET method', () => {
-    return request(app).get('/hellotest').then((response) => {
-      expect(response.statusCode).toBe(200);
-      expect(response.res.text).toBe('Valid GET request from Express server');
+    return request(app).get('/test')
+      .expect(200)
+      .then(res => {
+        expect(res.text).toBe('Successfully connected!')
+      })
     })
   })
-}) 
 
-describe('Test the categories path', () => {
 
- 
-  test('it should return a valid 200 code', (done) => {
-    expect.assertions(1);
-    return request(app).get('/products/categories')
-      .then(response=> expect(response.text).toEqual("[\"Smart Home\",\"Homes\",\"Clothing, Shoes & Jewelry\",\"Womens clothing\",\"Paternal Saddles\"]"))
+describe('Test database connectivity', () => {
+  afterAll(async (done) => {
+    setImmediate(done);
+  });
+  test('it should return data from the database', () => {
+    return request(app).get('/products/navBarData')
+      .expect(200)
+      .then(res => {
+        let products = JSON.parse(res.text);
+        expect(products.length).toBe(96)
+        expect(products[0]).toHaveProperty('productTitle')
+        expect(products[25]).toHaveProperty('category')
+        
+      });
   })
 })
