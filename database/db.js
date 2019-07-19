@@ -12,13 +12,18 @@ const ProductSchema = new Schema({
   category: String,
   attributes: String,
   totalImages: Number,
-  imageName: String
+  imageName: String,
 });
 
 const Product = mongoose.model('Product', ProductSchema);
 
-module.exports.getAll = () => (
-  Product.find({})
-  .catch(console.error)
-)
+const CartSchema = new Schema({
+  asin: String,
+  productTitle: String,
+  price: Number,
+  thumbnail: String,
+});
 
+const Cart = mongoose.model('Cart', CartSchema);
+
+module.exports.getAll = () => Product.find({}).catch(console.error);
