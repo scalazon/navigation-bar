@@ -1,5 +1,13 @@
 @import './themes.scss';
 
+.main_logo {
+  max-width: 200px;
+}
+
+.container {
+  max-width: 750px;
+}
+
 .navLinks {
   font-family: $ember-font;
   color: white;
@@ -41,7 +49,7 @@
   margin-right:auto;
 }
 
-#langSelect {
+.langSelect {
   position: relative;
   float: right;
   margin-left:auto; 

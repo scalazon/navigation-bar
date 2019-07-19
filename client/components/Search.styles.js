@@ -1,17 +1,17 @@
 const theme = {
   container: {
     position: 'relative',
-    width: '100%'
+    width: '65%'
   },
   
   input: {
-    width: '100%',
     height: 'auto',
+    width: '100%',
     padding: '10px 20px',
     fontWeight: '300',
     fontSize: '16px',
     border: '1px solid #aaa',
-    borderRadius: '4px'
+    borderRadius: '4px',
   },
   
   inputFocused: {
@@ -29,9 +29,9 @@ const theme = {
   
   suggestionsContainerOpen: {
     display: 'block',
+    width: '100%',
     position: 'absolute',
     top: '51px',
-    width: '100%',
     border: '1px solid #aaa',
     backgroundColor: '#fff',
     fontWeight: '300',

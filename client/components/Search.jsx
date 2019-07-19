@@ -44,6 +44,7 @@ class SearchBar extends React.Component {
   }
 
   // Teach Autosuggest how to calculate suggestions for any given input value.
+  // eslint-disable-next-line react/sort-comp
   getSuggestions (value) {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
