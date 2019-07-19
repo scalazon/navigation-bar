@@ -1,22 +1,25 @@
 import React from 'react';
-import { MdSearch} from 'react-icons/md';
+import { MdSearch } from 'react-icons/md';
 import { MdLanguage } from 'react-icons/md';
 import { FiMapPin } from 'react-icons/fi';
 import { IconContext } from 'react-icons';
+import DropdownButton from 'react-bootstrap/DropdownButton'
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
-import Row from 'react-bootstrap/Row';
 import Navbar from 'react-bootstrap/Navbar';
+import Image from 'react-bootstrap/Image';
 // eslint-disable-next-line import/extensions
 import SearchBar from './components/Search.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      cart: 0
+    };
   }
 
   render() {
@@ -34,7 +37,7 @@ class App extends React.Component {
             <Col xl={7}>
               <Nav>
                 <SearchBar />
-                <Button variant="warning" id="searchButton">
+                <Button variant="dark" id="searchButton">
                   <IconContext.Provider value={{ color: 'black', size: '2em' }}>
                     <MdSearch />
                   </IconContext.Provider>
@@ -49,12 +52,18 @@ class App extends React.Component {
             <Col xl={2}>
               <Nav className="navLinks">
                 <Button variant="dark" id="mapButton">
-                  <IconContext.Provider value={{ color: 'white', size: '1.5em' , className:'mapIcon'}}>
+                  <IconContext.Provider
+                    value={{
+                      color: 'white',
+                      size: '1.5em',
+                      className: 'mapIcon',
+                    }}
+                  >
                     <FiMapPin />
                   </IconContext.Provider>
                   <span id="deliver-top">Deliver to Zubair</span>
                   <br />
-                  <span id="deliver-bottom">Austin, 78701</span>
+                  <span id="deliver-bottom">Austin 78701</span>
                 </Button>
               </Nav>
             </Col>
@@ -70,7 +79,9 @@ class App extends React.Component {
                 <Button variant="dark">Help</Button>
                 <Dropdown id="langSelect">
                   <Dropdown.Toggle variant="dark" id="dropdown-basic">
-                    <IconContext.Provider value={{ color: 'white', size: '1.75em' }}>
+                    <IconContext.Provider
+                      value={{ color: 'white', size: '1.75em' }}
+                    >
                       <MdLanguage />
                     </IconContext.Provider>
                   </Dropdown.Toggle>
@@ -78,7 +89,7 @@ class App extends React.Component {
                   <Dropdown.Menu>
                     <Dropdown.Item>English - EN</Dropdown.Item>
                     <Dropdown.Item>Español - ES action</Dropdown.Item>
-                    <Dropdown.Item><a href="#">Learn More</a></Dropdown.Item>
+                    <Dropdown.Item as="a">Learn More</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </Nav>
@@ -107,11 +118,31 @@ class App extends React.Component {
                     <Dropdown.Item>Your Fanshop</Dropdown.Item>
                     <Dropdown.Item>Your Pets</Dropdown.Item>
                     <Dropdown.Item>Start a Selling Account</Dropdown.Item>
-                    <Dropdown.Item>Register for a Business Account</Dropdown.Item>
+                    <Dropdown.Item>
+                      Register for a Business Account
+                    </Dropdown.Item>
                     <Dropdown.Item>Your Amazon Credit Cards</Dropdown.Item>
                     <Dropdown.Item>Your Content and Devices</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+                <Button variant="dark">Orders</Button>
+                <DropdownButton variant="dark" className="btn" id="PrimeButton" title="Prime">
+                  <Dropdown.Item>
+                    <div>
+                      <p>Forthcoming team photo</p>
+                    </div>
+                  </Dropdown.Item>
+                </DropdownButton>
+                <Button variant="dark">
+                  <div id="cartButton">
+                    <Image 
+                      src="https://elasticbeanstalk-us-east-2-746219401089.s3.us-east-2.amazonaws.com/transparent-cart.png"
+                      id="cartImage"
+                    />
+                    <span id="cartTotal">{this.state.cart}</span>
+                  </div>
+                  <span id="cartTitle">Cart</span>
+                </Button>
               </Nav>
             </Col>
           </Container>
@@ -123,3 +154,24 @@ class App extends React.Component {
 
 export default App;
 
+/*
+ <OverlayTrigger
+                  trigger="click"
+                  placement="bottom"
+                  key="bottom"
+                  overlay={
+                    <Popover id="popover-positioned-bottom">
+                      <Popover.Title as="h3">
+                        Thanks for exploring!
+                      </Popover.Title>
+                      <Popover.Content>
+                        <span>Team pic coming soon!</span>
+                      </Popover.Content>
+                    </Popover>
+                  }
+                >
+                  <Button variant="dark">Prime</Button>
+                </OverlayTrigger>
+
+
+*/

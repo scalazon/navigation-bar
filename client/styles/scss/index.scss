@@ -65,3 +65,32 @@
 #searchButton {
   background-color: $amazon-yellow;
 }
+
+#PrimeButton {
+  margin-top: 5px;
+  align-content: center;
+}
+
+#cartImage {
+  margin-top: 15%;
+  margin-right: 15%;
+  max-width: 80;
+  max-height: 35px
+}
+
+#cartButton {
+  position: relative;
+  display: inline-block;
+}
+
+#cartTotal {
+  position: absolute;
+  z-index: 50;
+  margin: 0 auto;
+  left: 10%;
+  right: 0;
+  top: 0; 
+  text-align: center;
+  width: 60%; 
+  color: $amazon-yellow
+}
