@@ -156,7 +156,7 @@ class App extends React.Component {
                 </Button>
               </Nav>
         </Navbar>
-        <Cart />
+        {/* <Cart /> */}
       </>
     );
   }

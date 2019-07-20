@@ -1,6 +1,10 @@
+/* eslint-disable react/sort-comp */
 /* eslint-disable prettier/prettier */
 import Axios from 'axios';
 import React from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Badge from 'react-bootstrap/Badge';
 
 class Cart extends React.Component {
   constructor() {
@@ -12,7 +16,8 @@ class Cart extends React.Component {
     }
   }
 
-  componentDidMount() {
+
+  updateCart() {
     // Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/all')
     Axios.get('/cart/all')
     .then(result => {
@@ -36,7 +41,17 @@ class Cart extends React.Component {
     })
   }
 
+  componentDidMount() {
+    this.updateCart();
+  }
+
   render() {
+
+    const [show, setShow] = React.useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow();
+
     return(
       <div>
         <span>There are {this.state.numberOfItems} items</span>
