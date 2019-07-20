@@ -109,7 +109,7 @@ class Cart extends React.Component {
             
                       <Button variant='dark' id="removeCart" onClick={e => {
                         let asin = item.asin
-                        Axios.delete('/cart/removeItem', {data: {asin}}).then(() => {
+                        Axios.delete('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/removeItem', {data: {asin}}).then(() => {
                           this.updateCart();
                         })
                       }}><FaTrashAlt /></Button>
