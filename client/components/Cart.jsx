@@ -119,7 +119,7 @@ class Cart extends React.Component {
               })}
           </Modal.Body>
           <Modal.Footer>
-            Your cart total is:<span> </span><span id="cartFinalTotal">${Number(this.state.total)}</span>
+            Your cart total is:<span> </span><span id="cartFinalTotal">${Number(this.state.total).toFixed(2)}</span>
             <span>  </span>
             <Button variant="dark">
               Checkout
