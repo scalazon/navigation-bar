@@ -28,21 +28,21 @@ class Cart extends React.Component {
 
 
   updateCart() {
-    // Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/all')
-    Axios.get('/cart/all')
+    Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/all')
+    // Axios.get('/cart/all')
     .then(result => {
       this.setState({
         items: result.data
       })
-      // return Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/total')
-      return Axios.get('/cart/total')
+      return Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/total')
+      // return Axios.get('/cart/total')
     })
     .then(total => {
       this.setState({
         total: total.data
       })
-      // return Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/itemCount')
-      return Axios.get('/cart/itemCount')
+      return Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/itemCount')
+      // return Axios.get('/cart/itemCount')
     })
     .then(count => {
       this.setState({
@@ -54,7 +54,7 @@ class Cart extends React.Component {
   componentDidMount() {
     const listener = new BroadcastChannel('cart');
     listener.onmessage = (event) => {
-        Axios.post('/cart/add',{data: event.data}).then(this.updateCart()).catch(console.error)
+        Axios.post('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/add',{data: event.data}).then(this.updateCart()).catch(console.error)
     }
     this.updateCart();
   }
