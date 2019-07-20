@@ -81,8 +81,8 @@
 }
 
 #PrimeButton {
-  margin-top: 5px;
   align-content: center;
+  background-color: $amazon-yellow;
 }
 
 
@@ -129,4 +129,8 @@
   color: $amazon-yellow;
   font-family: $ember-bold;
   size: 18pt;
+}
+
+#primeBody {
+  align-items: center;
 }

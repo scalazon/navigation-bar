@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { MdSearch } from 'react-icons/md/index.js';
-import { MdLanguage } from 'react-icons/md/index.js';
-import { FiMapPin } from 'react-icons/fi/index.js';
+import { MdSearch } from 'react-icons/md/';
+import { MdLanguage } from 'react-icons/md/';
+import { FiMapPin } from 'react-icons/fi/';
 import { IconContext } from 'react-icons';
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Image from 'react-bootstrap/Image';
+import Prime from './components/Prime.jsx'
 // eslint-disable-next-line import/extensions
 import SearchBar from './components/Search.jsx';
 import Cart from './components/Cart.jsx';
@@ -109,13 +110,7 @@ class App extends React.Component {
                   </Dropdown.Menu>
                 </Dropdown>
                 <Button variant="dark">Orders</Button>
-                <DropdownButton variant="dark" className="btn" id="PrimeButton" title="Prime">
-                  <Dropdown.Item>
-                    <div>
-                      <p>Forthcoming team photo</p>
-                    </div>
-                  </Dropdown.Item>
-                </DropdownButton>
+                <Prime />
                 <Cart />
               </Nav>
         </Navbar>
