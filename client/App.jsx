@@ -144,7 +144,7 @@ class App extends React.Component {
                     </div>
                   </Dropdown.Item>
                 </DropdownButton>
-                <Button variant="dark">
+                {/* <Button variant="dark">
                   <div id="cartButton">
                     <Image 
                       src="https://elasticbeanstalk-us-east-2-746219401089.s3.us-east-2.amazonaws.com/transparent-cart.png"
@@ -153,10 +153,10 @@ class App extends React.Component {
                     <span id="cartTotal">{this.state.cart}</span>
                   </div>
                   <span id="cartTitle">Cart</span>
-                </Button>
+                </Button> */}
+                <Cart />
               </Nav>
         </Navbar>
-        {/* <Cart /> */}
       </>
     );
   }

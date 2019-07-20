@@ -5,6 +5,9 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
+import CardDeck from 'react-bootstrap/CardDeck';
+import Card from 'react-bootstrap/Card';
+import Image from 'react-bootstrap/Image';
 
 class Cart extends React.Component {
   constructor() {
@@ -12,8 +15,11 @@ class Cart extends React.Component {
     this.state = {
       numberOfItems: 0,
       items: [],
-      total: 0
+      total: 0,
+      visible: false,
     }
+    this.showHide = this.showHide.bind(this)
+    this.updateCart = this.updateCart.bind(this)
   }
 
 
@@ -45,18 +51,60 @@ class Cart extends React.Component {
     this.updateCart();
   }
 
+  showHide() {
+    const viz = !this.state.visible;
+    this.setState({
+      visible: viz
+    });
+  }
+
   render() {
 
-    const [show, setShow] = React.useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow();
 
     return(
-      <div>
-        <span>There are {this.state.numberOfItems} items</span>
-        <span>The subtotal is ${this.state.total}</span>
-      </div>
+      <>
+        <Button variant="dark" onClick={this.showHide}>
+          Cart <Badge variant="warning">{this.state.numberOfItems}</Badge>
+        </Button>
+
+        <Modal show={this.state.visible} 
+        onEnter={this.updateCart}
+        onHide={this.showHide}>
+          <Modal.Header closeButton>
+            <Modal.Title>Your Cart</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/* <CardDeck> */}
+              {this.state.items.map(item => {
+                return (
+                  <Card>
+                    <div className="card-horizontal">
+                      <Image thumbnail src={item.thumbnail} />
+                 
+                    {/* <Card.Img variant="top" id='cardImage' src={item.thumbnail} /> */}
+                    <Card.Body>
+                      <Card.Text>
+                      {item.productTitle}
+                      </Card.Text>
+                    </Card.Body>
+                    </div>
+                    <Card.Footer>
+                      ${item.price}, quantity: {item.quantity}
+                      <Button variant='dark'>Remove from Cart</Button>
+                    </Card.Footer>
+                  </Card>
+                )
+              })}
+            {/* </CardDeck> */}
+          </Modal.Body>
+          <Modal.Footer>
+            <p>Your subtotal is ${Number(this.state.total)}</p>
+            <Button variant="dark" id={'searchButton'} onClick={this.showHide}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
     )
   }
 }
