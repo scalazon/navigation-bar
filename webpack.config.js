@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 module.exports = {
   entry: {
@@ -13,6 +15,7 @@ module.exports = {
   optimization: {
     minimizer: [new TerserPlugin({})],
   },
+  plugins: [new BundleAnalyzerPlugin()],
   module: {
     rules: [
       {
@@ -22,7 +25,7 @@ module.exports = {
         query: {
           presets: ['@babel/preset-react', '@babel/preset-env', 'minify'],
         },
-      }, 
+      },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
@@ -33,7 +36,7 @@ module.exports = {
           'style-loader', // creates style nodes from JS strings
           'css-loader', // translates CSS into CommonJS
           'sass-loader' // compiles Sass to CSS, using Node Sass by default
-        ]
+        ],
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -43,10 +46,10 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               outputPath: 'fonts/'
-            }
-          }
-        ]
-      }
-    ]
-  }
+            },
+          },
+        ],
+      },
+    ],
+  },
 };

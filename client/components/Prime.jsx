@@ -42,7 +42,7 @@ class Prime extends React.Component {
           </Modal.Header>
           <Modal.Body id="primeBody">
               <p>Thanks for checking out our project!</p>
-              <Button variant='dark' id="PrimeButton">
+              <Button variant='dark' id="PrimeButton" href="https://github.com/hackmazon/navigation-bar/blob/master/README.md">
                 <FaGithub /><span>Check us out on Github</span>
               </Button>
           </Modal.Body>
