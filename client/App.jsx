@@ -12,29 +12,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import Image from 'react-bootstrap/Image';
 // eslint-disable-next-line import/extensions
 import SearchBar from './components/Search.jsx';
-import Cart from './components/Cart.jsx'
+import Cart from './components/Cart.jsx';
+import Axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cart: 0,
     };
-  }
-
-  componentDidMount() {
-    const listener = new BroadcastChannel('cart');
-    listener.onmessage = (event) => {
-      console.log(event.data)
-      console.log('cart:', this.state.cart)
-      let newCount = this.state.cart + event.data.quantity;
-      console.log(newCount)
-      this.setState({
-        cart: newCount
-      })
-    }
-
-    
   }
 
   render() {
@@ -91,19 +76,6 @@ class App extends React.Component {
                     <Dropdown.Item as="a">Learn More</Dropdown.Item>
                 </DropdownButton>
 
-                {/* <Dropdown id="langSelect">
-                  <Dropdown.Toggle variant="dark" id="dropdown-basic">
-                    <IconContext.Provider value={{ color: 'white', size: '1.75em' }}>
-                      <MdLanguage />
-                    </IconContext.Provider>
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu>
-                    <Dropdown.Item>English - EN</Dropdown.Item>
-                    <Dropdown.Item>Español - ES action</Dropdown.Item>
-                    <Dropdown.Item as="a">Learn More</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown> */}
               </Nav>
               </Navbar.Collapse>
               <Nav className="navLinks">

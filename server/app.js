@@ -29,8 +29,8 @@ app.get('/products/productData', (req,res) => {
 });
 
 app.post('/cart/add', (req,res) => {
-  let asin = req.body.asin;
-  let quantity = req.body.quantity;
+  let asin = req.body.data.asin;
+  let quantity = req.body.data.quantity;
   console.log(req.body)
   database.getOne(asin).then(product => {
     database.addToCart(product, quantity)
@@ -55,6 +55,13 @@ app.get('/cart/itemCount', (req,res) => {
     res.send(JSON.stringify(count))
   })
 })
+
+app.delete('/cart/removeItem', (req, res) => {
+  database.removeCartItem(req.body.asin).then(result => {
+    res.send('deleted!')
+  })
+})
+
 module.exports = app;
 
 // console.log('proudt after GET is:', product)

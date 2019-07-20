@@ -24,6 +24,12 @@
   font-family: $ember-bold;
 }
 
+#removeCart {
+  background-color: $amazon-yellow;
+  float: right;
+  position: relative;
+  align-content: center
+}
 
 .mapIcon {
   position: relative;
@@ -79,12 +85,6 @@
   align-content: center;
 }
 
-#cartImage {
-  margin-top: 15%;
-  margin-right: 15%;
-  max-width: 80;
-  max-height: 35px
-}
 
 #cartButton {
   position: relative;
@@ -103,12 +103,30 @@
   color: $amazon-yellow
 }
 
-#cardImage {
-  height: 25%;
-  margin-bottom: 5%
-}
-
 .card-horizontal {
   display: flex;
   flex: 1 1 auto;
+}
+
+.cart_thumbnail {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+.cart_thumbnail img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+
+#cartFinalTotal {
+  color: $amazon-yellow;
+  font-family: $ember-bold;
+  size: 18pt;
 }

@@ -76,3 +76,7 @@ module.exports.getCartItemCount = () => {
   })
   .catch(console.error)
 }
+
+module.exports.removeCartItem = (asin) => {
+  return Cart.deleteOne({ asin }).catch(console.error)
+}

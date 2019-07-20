@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable react/sort-comp */
 /* eslint-disable prettier/prettier */
 import Axios from 'axios';
@@ -5,9 +6,12 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
-import CardDeck from 'react-bootstrap/CardDeck';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
+import { FaTrashAlt } from 'react-icons/fa';
+import { TiShoppingCart } from 'react-icons/ti';
+import { IconContext } from 'react-icons';
+
 
 class Cart extends React.Component {
   constructor() {
@@ -48,6 +52,10 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
+    const listener = new BroadcastChannel('cart');
+    listener.onmessage = (event) => {
+        Axios.post('/cart/add',{data: event.data}).then(this.updateCart()).catch(console.error)
+    }
     this.updateCart();
   }
 
@@ -58,49 +66,63 @@ class Cart extends React.Component {
     });
   }
 
+
   render() {
 
 
     return(
       <>
         <Button variant="dark" onClick={this.showHide}>
-          Cart <Badge variant="warning">{this.state.numberOfItems}</Badge>
+          <IconContext.Provider value={{color: 'white',size: '2em'}}>
+            <TiShoppingCart />
+          </IconContext.Provider>
+          <Badge id="searchButton" variant="light">{this.state.numberOfItems}</Badge>
         </Button>
 
         <Modal show={this.state.visible} 
         onEnter={this.updateCart}
-        onHide={this.showHide}>
+        size={'lg'}
+        onHide={this.showHide}
+        id="mainNav" >
           <Modal.Header closeButton>
-            <Modal.Title>Your Cart</Modal.Title>
+            <Modal.Title variant="dark">Your Cart</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {/* <CardDeck> */}
-              {this.state.items.map(item => {
+              {this.state.items.map((item, i) => {
                 return (
-                  <Card>
+                  <Card key={i}>
                     <div className="card-horizontal">
-                      <Image thumbnail src={item.thumbnail} />
-                 
-                    {/* <Card.Img variant="top" id='cardImage' src={item.thumbnail} /> */}
-                    <Card.Body>
-                      <Card.Text>
-                      {item.productTitle}
-                      </Card.Text>
-                    </Card.Body>
+                      <div className="cart_thumbnail">
+                        <img src={item.thumbnail} alt={`{item.productTitle}`} />
+                      </div>
+                      <Card.Body>
+                        <Card.Title>{item.productTitle}</Card.Title>
+                        <Card.Text>
+                          Price: <Badge pill variant="dark">${Number(item.price).toFixed(2)}</Badge><br />
+                          Quantity: <Badge pill variant="dark">{item.quantity}</Badge><br />
+                          Subtotal: <Badge pill variant="dark">${Number(item.quantity * item.price).toFixed(2)}</Badge>
+                        </Card.Text>
+                      </Card.Body>
                     </div>
+          
                     <Card.Footer>
-                      ${item.price}, quantity: {item.quantity}
-                      <Button variant='dark'>Remove from Cart</Button>
+            
+                      <Button variant='dark' id="removeCart" onClick={e => {
+                        let asin = item.asin
+                        Axios.delete('/cart/removeItem', {data: {asin}}).then(() => {
+                          this.updateCart();
+                        })
+                      }}><FaTrashAlt /></Button>
                     </Card.Footer>
                   </Card>
                 )
               })}
-            {/* </CardDeck> */}
           </Modal.Body>
           <Modal.Footer>
-            <p>Your subtotal is ${Number(this.state.total)}</p>
-            <Button variant="dark" id={'searchButton'} onClick={this.showHide}>
-              Close
+            Your cart total is:<span> </span><span id="cartFinalTotal">${Number(this.state.total)}</span>
+            <span>  </span>
+            <Button variant="dark">
+              Checkout
             </Button>
           </Modal.Footer>
         </Modal>
