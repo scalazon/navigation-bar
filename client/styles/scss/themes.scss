@@ -1,15 +1,15 @@
 @font-face {
   font-family: 'AmazonEmber';
-  src: url('../fonts/AmazonEmber_Rg.ttf') format('truetype');
+  src: url('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/fonts/AmazonEmber_Rg.ttf') format('truetype');
 }
 @font-face {
   font-family: 'AmazonEmberBold';
-  src: url('../fonts/AmazonEmber_Bd.ttf') format('truetype');
+  src: url('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/fonts/AmazonEmber_Bd.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'AmazonEmberLite';
-  src: url('../fonts/AmazonEmber_Lt.ttf') format('truetype');
+  src: url('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/fonts/AmazonEmber_Lt.ttf') format('truetype');
 }
 
 $ember-font: AmazonEmber, EmberRg, sans-serif;

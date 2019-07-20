@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { MdSearch } from 'react-icons/md';
-import { MdLanguage } from 'react-icons/md';
-import { FiMapPin } from 'react-icons/fi';
+import { MdSearch } from 'react-icons/md/index.js';
+import { MdLanguage } from 'react-icons/md/index.js';
+import { FiMapPin } from 'react-icons/fi/index.js';
 import { IconContext } from 'react-icons';
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown';

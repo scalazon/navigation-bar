@@ -1,10 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
-// const combineLoaders = require('webpack-combine-loaders');
-
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
   entry: {
     index: './client/index.js' //entry point
   },
@@ -12,13 +10,18 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'navbar_bundle.js'
   },
-
+  optimization: {
+    minimizer: [new TerserPlugin({})],
+  },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|mjs)$/,
         exclude: /(node_modules|bower_components)/,
-        use: ['babel-loader']
+        loader: 'babel-loader',
+        query: {
+          presets: ['@babel/preset-react', '@babel/preset-env', 'minify'],
+        },
       }, 
       {
         test: /\.css$/i,
