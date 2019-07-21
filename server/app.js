@@ -2,12 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
+const compression = require('compression');
 
 // eslint-disable-next-line import/no-dynamic-require
 const database = require(path.resolve(__dirname, '../database/db.js'));
 const app = express();
 
 app.use(cors());
+app.use(compression());
 app.use(express.static('dist'));
 app.use(bodyParser.json({ strict: false }));
 
