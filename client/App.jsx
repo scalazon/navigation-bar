@@ -63,8 +63,8 @@ class App extends React.Component {
                 <Button variant="dark">Today's Deals</Button>
                 <Button variant="dark">My Hackmazon.com</Button>
                 <Button variant="dark">Buy Again</Button>
-                <Button variant="dark">Whole Foods</Button>
-                <Button variant="dark">Gift Cards</Button>
+                {/* <Button variant="dark">Whole Foods</Button>
+                <Button variant="dark">Gift Cards</Button> */}
                 <Button variant="dark">Sell</Button>
                 <Button variant="dark">Help</Button>
                 <DropdownButton variant="dark" className="btn" id="LangButton" title={
