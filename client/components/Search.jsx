@@ -9,14 +9,13 @@ class SearchBar extends React.Component {
   constructor() {
     super();
 
-    // Autosuggest is a controlled component.
-    // This means that you need to provide an input value
-    // and an onChange handler that updates this value (see below).
-    // Suggestions also need to be provided to the Autosuggest,
-    // and they are initially empty because the Autosuggest is closed.
+    
     this.state = {
+      //Value currently typed into search bar
       value: '',
+      //array of suggestions that match input
       suggestions: [],
+      //array of all products pull in via Axios call
       rawproductData: [],
     };
     this.getSuggestions = this.getSuggestions.bind(this);
@@ -32,6 +31,7 @@ class SearchBar extends React.Component {
     this.broadcastASIN = this.broadcastASIN.bind(this);
   }
 
+  //populate rawProductData with array of product objects from Atlas
   componentDidMount() {
     Axios.get(
       'http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/navBarData'
@@ -43,32 +43,34 @@ class SearchBar extends React.Component {
     });
   }
 
-  // Teach Autosuggest how to calculate suggestions for any given input value.
+  // Get array of suggestions that match input
   // eslint-disable-next-line react/sort-comp
   getSuggestions (value) {
+
+    //Trim input whitespace and make lower case
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
 
+    //if input is empty, return empty array. Otherwise return matching products where first n letters
+    //match input
     return inputLength === 0 ? [] : this.state.rawproductData.filter(product =>
       product.productTitle.toLowerCase().slice(0, inputLength) === inputValue
     )
   }
 
-  // When suggestion is clicked, Autosuggest needs to populate the input
-  // based on the clicked suggestion. Teach Autosuggest how to calculate the
-  // input value for every given suggestion.
+  // Return title of clicked suggestion 
   getSuggestionValue (suggestion) {
     return suggestion.productTitle
   };
 
+  // Get value of input
   onChange (event, { newValue }) {
     this.setState({
       value: newValue
     });
   };
 
-  // Autosuggest will call this function every time you need to update suggestions.
-  // You already implemented this logic above, so just use it.
+  // Populate suggestions with results of getSuggestions
   onSuggestionsFetchRequested ({ value }) {
     this.setState({
       suggestions: this.getSuggestions(value)
@@ -88,6 +90,7 @@ class SearchBar extends React.Component {
     bc.postMessage(suggestionObject.suggestion.asin);
   };
 
+  //Function to render each suggestion span in the Div container
   renderSuggestion (suggestion,{ query, isHighlighted }) {
     if (!isHighlighted) {
       return(

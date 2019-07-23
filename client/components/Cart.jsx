@@ -17,16 +17,20 @@ class Cart extends React.Component {
   constructor() {
     super();
     this.state = {
+      //count of items in cart
       numberOfItems: 0,
+      //array of item objects in cart
       items: [],
+      //total dollar value in cart
       total: 0,
+      //if cart should be visible
       visible: false,
     }
     this.showHide = this.showHide.bind(this)
     this.updateCart = this.updateCart.bind(this)
   }
 
-
+  //function to be run each time cart is changed
   updateCart() {
     Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/all')
     // Axios.get('/cart/all')
@@ -59,6 +63,7 @@ class Cart extends React.Component {
     this.updateCart();
   }
 
+  //toggle function to show/hide cart
   showHide() {
     const viz = !this.state.visible;
     this.setState({
@@ -106,7 +111,7 @@ class Cart extends React.Component {
                     </div>
           
                     <Card.Footer>
-            
+                      {/* button that deletes item in cart */}
                       <Button variant='dark' id="removeCart" onClick={e => {
                         let asin = item.asin
                         Axios.delete('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/removeItem', {data: {asin}}).then(() => {

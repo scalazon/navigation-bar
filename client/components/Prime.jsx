@@ -10,7 +10,7 @@ import { FaGithub } from 'react-icons/fa/'
 
 
 
-
+//Simple secondary modal to show link to project README - should be considered an "easter egg"
 class Prime extends React.Component {
   constructor() {
     super();
