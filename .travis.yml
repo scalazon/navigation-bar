@@ -8,13 +8,16 @@ cache: npm
 
 # before_script: 
 script:
+  - sleep 15
+  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
   - npm start
   - npm test
-
+services:
+  - mongodb
 # after_success:
 # after_failure:
 # before deploy:
 # deploy:
 # after deploy:
-services:
-  - mongodb
+
+  
