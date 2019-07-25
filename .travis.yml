@@ -16,4 +16,5 @@ script:
 # before deploy:
 # deploy:
 # after deploy:
-#services: 
+services:
+  - mongodb
