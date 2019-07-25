@@ -6,12 +6,12 @@ cache: npm
 # before install:
 # install:
 
-# before_script: 
-script:
+before_script: 
   - sleep 15
   - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
-  - npm start
-  - npm test
+  - node server/server.js &
+# script:
+#   - npm test
 services:
   - mongodb
 # after_success:
