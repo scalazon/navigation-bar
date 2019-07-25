@@ -7,7 +7,10 @@ cache: npm
 # install:
 
 # before_script: 
-# script:
+script:
+  - npm run server_dev
+  - npm test
+
 # after_success:
 # after_failure:
 # before deploy:
