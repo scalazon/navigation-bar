@@ -8,7 +8,7 @@ cache: npm
 
 # before_script: 
 script:
-  - npm run server_dev
+  - npm test
   - node server/server.js
 
 # after_success:
