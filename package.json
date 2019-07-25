@@ -5,7 +5,8 @@
   "author": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles --forceExit",
+    "test": "jest",
+    
     "webpack_dev": "webpack --mode=development --watch",
     "webpack_build": "webpack --mode=production",
     "server_dev": "nodemon -r dotenv/config server/server.js",

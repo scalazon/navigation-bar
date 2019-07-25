@@ -36,6 +36,7 @@ class SearchBar extends React.Component {
     Axios.get(
       'http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/navBarData'
     ).then(result => {
+      console.log('got the data!')
       const productData = result.data;
       this.setState({
         rawproductData: productData,
