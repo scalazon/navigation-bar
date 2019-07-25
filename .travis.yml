@@ -8,8 +8,8 @@ cache: npm
 
 # before_script: 
 script:
-  - npm test
   - node server/server.js
+  - npm test
 
 # after_success:
 # after_failure:
