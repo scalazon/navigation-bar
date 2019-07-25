@@ -5,7 +5,7 @@
   "author": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --detectOpenHandles --forceExit",
     "webpack_dev": "webpack --mode=development --watch",
     "webpack_build": "webpack --mode=production",
     "server_dev": "nodemon -r dotenv/config server/server.js",
@@ -77,14 +77,7 @@
       [
         "@babel/react"
       ]
-    ],
-    "env": {
-      "test": {
-        "plugins": [
-          "@babel/plugin-transform-runtime"
-        ]
-      }
-    }
+    ]
   },
   "jest": {
     "testEnvironment": "node"

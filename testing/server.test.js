@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../server/app')
-const dotenv = require('dotenv').config()
+// const dotenv = require('dotenv').config()
 
 describe('Test the test path', () => {
 
@@ -19,9 +19,11 @@ describe('Test the test path', () => {
 
 
 describe('Test database connectivity', () => {
+
   afterAll(async (done) => {
     setImmediate(done);
   });
+  
   test('it should return data from the database', () => {
     return request(app).get('/products/navBarData')
       .expect(200)
