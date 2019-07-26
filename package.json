@@ -10,7 +10,7 @@
     "webpack_build": "webpack --mode=production",
     "server_dev": "nodemon -r dotenv/config server/server.js",
     "dev": "webpack --watch && nodemon -r dotenv/config server/server.js",
-    "seedDB": "nodemon -r dotenv/config database/dbSeedingServer.js"
+    "seedDB": "node database/dbSeedingServer.js"
   },
   "dependencies": {
     "autoprefixer": "^9.6.1",
@@ -78,6 +78,13 @@
         "@babel/react"
       ]
     ]
+  },
+  "env": {
+    "test": {
+      "plugins": [
+        "@babel/plugin-transform-runtime"
+      ]
+    }
   },
   "jest": {
     "testEnvironment": "node"
