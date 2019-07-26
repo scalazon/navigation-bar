@@ -29,22 +29,31 @@ class Cart extends React.Component {
 
   updateCart() {
     //DB call to get all items in the cart and update the cart's items state
-    Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/all')
-    // Axios.get('/cart/all')
+    Axios.get(
+      // 'http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/all'
+      '/cart/all'
+      )
+
     .then(result => {
       this.setState({
         items: result.data
       })
-      return Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/total')
-      // return Axios.get('/cart/total')
+      return Axios.get(
+        // 'http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/total'
+        '/cart/all'
+        )
+
     })
     //DB call to update the $total of items in the cart state
     .then(total => {
       this.setState({
         total: total.data
       })
-      return Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/itemCount')
-      // return Axios.get('/cart/itemCount')
+      return Axios.get(
+        // 'http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/itemCount'
+        '/cart/itemCount'
+        )
+
     })
     //DB call to up the state of the item count
     .then(count => {
@@ -58,7 +67,10 @@ class Cart extends React.Component {
     const listener = new BroadcastChannel('cart');
     listener.onmessage = (event) => {
       //When we get a message to add something to the cart, post to update our db
-        Axios.post('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/add',{data: event.data})
+        Axios.post(
+          // 'http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/add'
+          '/cart/add'
+          ,{data: event.data})
         //then make server request to update the local state from the database
         .then(this.updateCart())
         .catch(console.error)
@@ -116,7 +128,10 @@ class Cart extends React.Component {
             
                       <Button variant='dark' id="removeCart" onClick={e => {
                         let asin = item.asin
-                        Axios.delete('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/removeItem', {data: {asin}}).then(() => {
+                        Axios.delete(
+                          // 'http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/removeItem'
+                          '/cart/removeItem'
+                          , {data: {asin}}).then(() => {
                           this.updateCart();
                         })
                       }}><FaTrashAlt /></Button>

@@ -35,13 +35,14 @@ class SearchBar extends React.Component {
   componentDidMount() {
     //on mount, get all the products from the db set the rawproductData state.
     Axios.get(
-      'http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/navBarData'
+      // 'http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/products/navBarData'
+      `/products/navBarData`
     ).then(result => {
       console.log('got the data!')
       const productData = result.data;
       this.setState({
         rawproductData: productData,
-      });
+      }, ()=>{console.log(this.state.rawproductData)});
     });
   }
 
