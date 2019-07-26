@@ -28,6 +28,7 @@ class Cart extends React.Component {
 
 
   updateCart() {
+    //DB call to get all items in the cart and update the cart's items state
     Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/all')
     // Axios.get('/cart/all')
     .then(result => {
@@ -37,6 +38,7 @@ class Cart extends React.Component {
       return Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/total')
       // return Axios.get('/cart/total')
     })
+    //DB call to update the $total of items in the cart state
     .then(total => {
       this.setState({
         total: total.data
@@ -44,6 +46,7 @@ class Cart extends React.Component {
       return Axios.get('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/itemCount')
       // return Axios.get('/cart/itemCount')
     })
+    //DB call to up the state of the item count
     .then(count => {
       this.setState({
         numberOfItems: count.data
@@ -54,7 +57,11 @@ class Cart extends React.Component {
   componentDidMount() {
     const listener = new BroadcastChannel('cart');
     listener.onmessage = (event) => {
-        Axios.post('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/add',{data: event.data}).then(this.updateCart()).catch(console.error)
+      //When we get a message to add something to the cart, post to update our db
+        Axios.post('http://hackmazonnavbar-env.bj77f9npm5.us-east-2.elasticbeanstalk.com/cart/add',{data: event.data})
+        //then make server request to update the local state from the database
+        .then(this.updateCart())
+        .catch(console.error)
     }
     this.updateCart();
   }
