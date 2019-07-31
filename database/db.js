@@ -81,8 +81,28 @@ module.exports.removeCartItem = (asin) => {
   return Cart.deleteOne({ asin }).catch(console.error)
 }
 
+
+
+
+//This search functions first looks to see if the search term has been searched recently (is in the cache)
+//if not, it searches it and adds it to the cache
+//if it is in the cache, it returns the cached results and incremements the timesSearched variable
+const cache = {}
 module.exports.search = (searchTerm) => {
-  // let results = Product.find({$text: {"$search" : `${searchTerm}`}}).limit(10)
-  let results = Product.find({"productTitle": {"$regex" : `.*${searchTerm}.*`, "$options" : "i"}}).limit(10)
-  return results
+  
+  if (cache.hasOwnProperty(searchTerm)) {
+    console.log('delivered from cache', `times searched ${cache[searchTerm].timesSearched}`)
+    cache[searchTerm].timesSearched++
+    return cache[searchTerm].list;
+  } else {
+    let results = Product.find({"productTitle": {"$regex" : `.*${searchTerm}.*`, "$options" : "i"}}).limit(10)
+    if (results) {
+      cache[searchTerm] = {
+        timesSearched: 0,
+        list: results
+      }
+      // console.log(cache)
+    }
+    return results
+  }
 }
