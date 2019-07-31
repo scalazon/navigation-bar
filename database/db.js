@@ -80,3 +80,8 @@ module.exports.getCartItemCount = () => {
 module.exports.removeCartItem = (asin) => {
   return Cart.deleteOne({ asin }).catch(console.error)
 }
+
+module.exports.search = (searchTerm) => {
+  let results = Product.find({$text: {"$search" : `${searchTerm}`}}).limit(10)
+  return results
+}

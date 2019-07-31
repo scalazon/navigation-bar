@@ -40,7 +40,12 @@ app.post('/cart/add', (req,res) => {
 
 app.post('/products/search', (req, res) => {
   const searchTerm = req.body.searchTerm
-  res.send(`we received your search request for ${req.body.searchTerm}`)
+  database.search(searchTerm)
+  .then( (results) => {
+    //send back the array of search results
+    // res.send(results.map( item => item.productTitle))
+    res.send(results)
+  })
 })
 
 app.get('/cart/total', (req,res) => {
@@ -68,6 +73,13 @@ app.delete('/cart/removeItem', (req, res) => {
 })
 
 
+getSuggestions = (searchTerm) =>  {
+  const results = [];
+  while (results.length <= 10) {
+
+  }
+
+}
 
 module.exports = app;
 

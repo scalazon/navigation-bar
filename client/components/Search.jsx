@@ -77,7 +77,11 @@ class SearchBar extends React.Component {
     //axios request to get suggestions
     //result => set state to result 
     Axios.post('/products/search', {searchTerm: value})
-    .then( (result) => {console.log(result.data)})
+    .then( (results) => {
+      console.log(results.data)
+      this.setState({suggestions: results.data})
+    
+    })
 
 
     // this.setState({
