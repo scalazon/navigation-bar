@@ -82,6 +82,7 @@ module.exports.removeCartItem = (asin) => {
 }
 
 module.exports.search = (searchTerm) => {
-  let results = Product.find({$text: {"$search" : `${searchTerm}`}}).limit(10)
+  // let results = Product.find({$text: {"$search" : `${searchTerm}`}}).limit(10)
+  let results = Product.find({"productTitle": {"$regex" : `.*${searchTerm}.*`, "$options" : "i"}}).limit(10)
   return results
 }

@@ -44,6 +44,7 @@ app.post('/products/search', (req, res) => {
   .then( (results) => {
     //send back the array of search results
     // res.send(results.map( item => item.productTitle))
+    console.log(results, `searched for ${searchTerm}`)
     res.send(results)
   })
 })
