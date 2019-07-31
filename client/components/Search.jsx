@@ -73,9 +73,16 @@ class SearchBar extends React.Component {
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested ({ value }) {
-    this.setState({
-      suggestions: this.getSuggestions(value)
-    });
+    console.log('search requested for: ' + value)
+    //axios request to get suggestions
+    //result => set state to result 
+    Axios.post('/products/search', {searchTerm: value})
+    .then( (result) => {console.log(result.data)})
+
+
+    // this.setState({
+    //   suggestions: this.getSuggestions(value)
+    // });
   };
 
   // Autosuggest will call this function every time you need to clear suggestions.

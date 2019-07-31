@@ -38,6 +38,11 @@ app.post('/cart/add', (req,res) => {
   });
 })
 
+app.post('/products/search', (req, res) => {
+  const searchTerm = req.body.searchTerm
+  res.send(`we received your search request for ${req.body.searchTerm}`)
+})
+
 app.get('/cart/total', (req,res) => {
   database.getCartSubtotal().then(data => {
     res.send(JSON.stringify(data))
@@ -61,6 +66,8 @@ app.delete('/cart/removeItem', (req, res) => {
     res.send('deleted!')
   })
 })
+
+
 
 module.exports = app;
 

@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Image from 'react-bootstrap/Image';
+
 // eslint-disable-next-line import/extensions
 import SearchBar from './components/Search.jsx';
 import Cart from './components/Cart.jsx';
