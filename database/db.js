@@ -98,7 +98,7 @@ module.exports.search = (searchTerm) => {
     let results = Product.find({"productTitle": {"$regex" : `.*${searchTerm}.*`, "$options" : "i"}}).limit(10)
     if (results) {
       cache[searchTerm] = {
-        timesSearched: 0,
+        timesSearched: 1,
         list: results
       }
       // console.log(cache)
